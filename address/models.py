@@ -1,11 +1,13 @@
 from django.db import models
 
+from address.choices import UF_CHOICES
+
 
 class Address(models.Model):
     line1 = models.CharField(max_length=100)
     line2 = models.CharField(max_length=100, null=True, blank=True)
     city = models.CharField(max_length=80)
-    state = models.CharField(max_length=50)
+    state = models.CharField(max_length=50, choices=UF_CHOICES)
     latitude = models.IntegerField(null=True, blank=True)
     longitude = models.IntegerField(null=True, blank=True)
 

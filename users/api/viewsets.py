@@ -1,3 +1,4 @@
+from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from ..api.serializers import UserSerializer
@@ -6,6 +7,20 @@ from ..models import User
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
+    filter_backends = (SearchFilter,)
+    search_fields = (
+        'name',
+        'RG',
+        'CPF',
+        'phoneNumber',
+        'dateOfBirth',
+        'address__line1',
+        'address__city',
+        'address__state',
+        'professionalInformation__profession',
+        'professionalInformation__companyName',
+        'professionalInformation__position'
+    )
 
     def get_queryset(self):
         queryset = User.objects.filter(active=True)
