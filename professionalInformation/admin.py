@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import ProfessionalInformation
 
-# Register your models here.
+
+admin.site.register(ProfessionalInformation)
