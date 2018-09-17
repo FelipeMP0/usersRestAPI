@@ -1,12 +1,13 @@
 from django.db import models
 from address.models import Address
 from professionalInformation.models import ProfessionalInformation
+from users.validations import validate_rg_length, validate_cpf, validate_cpf_length
 
 
 class User(models.Model):
     name = models.CharField(max_length=200)
-    RG = models.CharField(max_length=11, unique=True)
-    CPF = models.CharField(max_length=13, unique=True)
+    RG = models.CharField(max_length=11, unique=True,  validators=[validate_rg_length])
+    CPF = models.CharField(max_length=13, unique=True, validators=[validate_cpf, validate_cpf_length])
     phoneNumber = models.CharField(max_length=15)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True, blank=True)
     professionalInformation = models.ForeignKey(ProfessionalInformation, on_delete=models.CASCADE, null=True, blank=True)
