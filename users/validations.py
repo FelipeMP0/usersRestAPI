@@ -7,7 +7,7 @@ def validate_rg_length(value):
 
 
 def validate_cpf_length(value):
-    if len(value) < 12 or len(value) > 12:
+    if len(value) != 11:
         raise ValidationError(u'%s is not a valid CPF.' % value)
 
 

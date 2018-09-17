@@ -1,8 +1,14 @@
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from rest_framework import settings
 from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from django.core.cache import cache
 from ..api.serializers import UserSerializer
 from ..models import User
+
+
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
 class UserViewSet(ModelViewSet):
@@ -23,7 +29,11 @@ class UserViewSet(ModelViewSet):
     )
 
     def get_queryset(self):
-        queryset = User.objects.filter(active=True)
+        if 'queryset' in cache:
+            queryset = cache.get('queryset')
+        else:
+            queryset = User.objects.filter(active=True)
+            cache.set('queryset', queryset, timeout=CACHE_TTL)
         return queryset
 
     def destroy(self, request, *args, **kwargs):
@@ -34,16 +44,22 @@ class UserViewSet(ModelViewSet):
             return Response({"detail": "Not found."}, status=404)
         if user.active:
             queryset.update(RG=user.RG + 'd', CPF=user.CPF + 'd', active=False)
+            cache.delete('queryset')
+            cache.delete(kwargs['pk'])
             return Response(status=204)
         else:
             return Response({"detail": "Not found."}, status=404)
 
     def retrieve(self, request, *args, **kwargs):
+        if kwargs['pk'] in cache:
+            user = cache.get(kwargs['pk'])
+            return Response(user.to_dict())
         try:
             user = User.objects.get(pk=kwargs['pk'])
         except User.DoesNotExist:
             return Response({"detail": "Not found."}, status=404)
         if user.active:
+            cache.set(kwargs['pk'], user, timeout=CACHE_TTL)
             return Response(user.to_dict())
         else:
             return Response({"detail": "Not found."}, status=404)

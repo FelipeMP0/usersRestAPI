@@ -1,9 +1,15 @@
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from rest_framework import settings
 from rest_framework.serializers import ModelSerializer
 from address.api.serializers import AddressSerializer
 from address.models import Address
 from professionalInformation.api.serializers import ProfessionalInformationSerializer
 from professionalInformation.models import ProfessionalInformation
+from django.core.cache import cache
 from users.models import User
+
+
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
 class UserSerializer(ModelSerializer):
@@ -34,6 +40,8 @@ class UserSerializer(ModelSerializer):
         user.address = address
         user.professionalInformation = professionalinformation
         user.save()
+        if 'queryset' in cache:
+            cache.delete('queryset')
         return user
 
     def update(self, instance, validated_data):
@@ -58,9 +66,11 @@ class UserSerializer(ModelSerializer):
         address.line2 = addresstemp.get('line2', address.line2)
         address.city = addresstemp.get('city', address.city)
         address.state = addresstemp.get('state', address.state)
-        address.country = addresstemp.get('country', address.country)
         address.latitude = addresstemp.get('latitude', address.latitude)
         address.longitude = addresstemp.get('longitude', address.longitude)
         address.save()
+
+        if 'queryset' in cache:
+            cache.delete('queryset')
 
         return instance
