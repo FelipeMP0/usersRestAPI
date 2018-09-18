@@ -4,11 +4,13 @@ from django.core.exceptions import ValidationError
 def validate_rg_length(value):
     if len(value) < 6 or len(value) > 10:
         raise ValidationError(u'%s is not a valid RG.' % value)
+    return True
 
 
 def validate_cpf_length(value):
     if len(value) != 11:
         raise ValidationError(u'%s is not a valid CPF.' % value)
+    return True
 
 
 def validate_cpf(value):
@@ -32,6 +34,7 @@ def validate_cpf(value):
     verified_digits = str(first_digit) + str(second_digit)
     if verified_digits != digits:
         raise ValidationError(u'%s is not a valid CPF.' % value)
+    return True
 
 
 def get_first_digit(numbers):
