@@ -1,11 +1,14 @@
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from rest_framework import settings
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.core.cache import cache
 from ..api.serializers import UserSerializer
 from ..models import User
+import os
 
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -14,6 +17,9 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     filter_backends = (SearchFilter,)
+    if os.getenv('API_AUTHENTICATION', 'FALSE') == 'True':
+        permission_classes = (IsAuthenticatedOrReadOnly,)
+        authentication_classes = (TokenAuthentication,)
     search_fields = (
         'name',
         'RG',
