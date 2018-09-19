@@ -1,0 +1,33 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx01
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - /static:/static
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: usersRestAPI01
+    command: bash -c "export API_AUTHENTICATION="False" && python3 manage.py makemigrations && python3 manage.py migrate && gunicorn usersRestAPI.wsgi -b 0.0.0.0:8000 && python3 manage.py collectstatic --noinput"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./src:/src
+      - /static:/static
+    expose:
+      - "8000"
+    
+  db:
+    image: postgres:latest
+    container_name: postgres01 
+  
+  redis:
+    image: redis:latest
+    container_name: redis01
