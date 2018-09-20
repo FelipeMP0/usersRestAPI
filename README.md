@@ -7,20 +7,30 @@ API REST para gerenciamento, consulta e pesquisa de informações básicas de us
 Para executar o projeto são necessários o docker e docker-compose instalados.
 
 Para instalar o docker no ubuntu são necessários os comandos:
-`sudo apt update`
-`sudo apt install apt-transport-https ca-certificates curl software-properties-common`
-`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`
-`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"`
-`sudo apt update`
-`sudo apt install docker-ce`
+`sudo apt update`  
+
+`sudo apt install apt-transport-https ca-certificates curl software-properties-common`  
+
+`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`  
+
+`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"`  
+
+`sudo apt update`  
+
+`sudo apt install docker-ce`  
+
 
 Para instalar o docker-compose são necessários os comandos:
-`sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
-`sudo chmod +x /usr/local/bin/docker-compose`
+`sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`  
+
+`sudo chmod +x /usr/local/bin/docker-compose`  
+
 
 Para instalar no Linux Manjaro são necessários os comandos:
-`sudo pacman -S docker`
-`sudo pacman -S docker-compose`
+`sudo pacman -S docker`  
+
+`sudo pacman -S docker-compose`  
+
 
 Para iniciar o docker:
 `sudo systemctl start docker`
