@@ -6,7 +6,8 @@ API REST para gerenciamento, consulta e pesquisa de informações básicas de us
 
 Para executar o projeto são necessários o docker e docker-compose instalados.
 
-Para instalar o docker no ubuntu são necessários os comandos:
+Para instalar o docker no ubuntu são necessários os comandos:  
+
 `sudo apt update`  
 
 `sudo apt install apt-transport-https ca-certificates curl software-properties-common`  
@@ -20,19 +21,22 @@ Para instalar o docker no ubuntu são necessários os comandos:
 `sudo apt install docker-ce`  
 
 
-Para instalar o docker-compose são necessários os comandos:
+Para instalar o docker-compose são necessários os comandos:  
+
 `sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`  
 
 `sudo chmod +x /usr/local/bin/docker-compose`  
 
 
-Para instalar no Linux Manjaro são necessários os comandos:
+Para instalar no Linux Manjaro são necessários os comandos:  
+
 `sudo pacman -S docker`  
 
 `sudo pacman -S docker-compose`  
 
 
-Para iniciar o docker:
+Para iniciar o docker:  
+
 `sudo systemctl start docker`
 
 No Windows basta fazer o download e instalação do Docker Community Edition for Windows onde já estão presentes o docker e docker-compose
@@ -369,11 +373,19 @@ E para ver um relatório dos resultados do coverage deve ser executado o comando
 
 ## Recursos utilizados
 
-django - Framework web utilizado
-djangorestframework - Framework para REST API's usado juntamente com o django
-django_filter - Para pesquisas parametrizadas na url
-coverage - Para testes e relatórios
-django_redis - Para integração com o servidor Redis, utilizado para armazenamento de cache
-gunicorn - Servidor HTTP para python
-nginx - Servidor proxy HTTP
-PostgreSQL - Bancos de dados para persistência dos dados.
+django - Framework web utilizado  
+
+djangorestframework - Framework para REST API's usado juntamente com o django  
+
+django_filter - Para pesquisas parametrizadas na url  
+
+coverage - Para testes e relatórios  
+
+django_redis - Para integração com o servidor Redis, utilizado para armazenamento de cache  
+
+gunicorn - Servidor HTTP para python  
+
+nginx - Servidor proxy HTTP  
+
+PostgreSQL - Bancos de dados para persistência dos dados.  
+
