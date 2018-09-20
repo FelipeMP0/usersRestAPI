@@ -47,7 +47,8 @@ Para executar o projeto abra um terminal e vá até o diretório do projeto. Den
 
 Para confirmar se a aplicação está funcionando pode ser enviada uma requisição HTTP GET utilizando o programa Postman ou similar para o endpoint /users (localhost:8000/users ou 0.0.0.0:8000/users).
 
-A resposta recebida deve ser similar a seguinte:
+A resposta recebida deve ser similar a seguinte:  
+```
 HTTP 200 OK
 Allow: GET, POST, HEAD, OPTIONS
 Connection: keep-alive
@@ -59,6 +60,7 @@ Vary: Accept, Cookie
 X-Frame-Options: SAMEORIGIN
 
 []
+```  
 
 ## Autenticação 
 
