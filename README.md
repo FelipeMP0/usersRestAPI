@@ -45,7 +45,7 @@ No Windows basta fazer o download e instalação do Docker Community Edition for
 
 Para executar o projeto abra um terminal e vá até o diretório do projeto. Dentro do diretório execute o comando `sudo docker-compose build` e depois o comando `sudo docker-compose up -d`. Com esses comandos as imagens e containers serão criados. Segundo as configurações dos arquivos originais a API estará ouvindo em localhost:8000 ou 0.0.0.0:8000.
 
-Para confirmar se a aplicação está funcionando pode ser enviada uma requisição HTTP GET utilizando o programa Postman ou similar para o endpoint /users (localhost:8000/users ou 0.0.0.0:8000/users).
+Para confirmar se a aplicação está funcionando pode ser enviada uma requisição HTTP GET utilizando o programa Postman ou similar para o endpoint /users (localhost:8000/users/ ou 0.0.0.0:8000/users/).
 
 A resposta recebida deve ser similar a seguinte:  
 ```
